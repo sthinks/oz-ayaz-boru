@@ -3,9 +3,9 @@ import Banner from '../../components/banner/Banner'
 import productBanner from '../../assets/product.png'
 import axiosClient from '../../utils/axiosClient'
 import Slider from 'react-slick'
+import ProductImg from '../../assets/ozayaz/aboutus.png'
 import Loading from '../../components/loading/Loading'
 import { AiOutlineClose } from 'react-icons/ai'
-import './product.css'
 import { useNavigate } from 'react-router-dom'
 function Product() {
   const [data, setData] = useState([])
@@ -56,32 +56,39 @@ function Product() {
     <Loading />
   ) : (
     <>
-      <Banner image={productBanner} title="Ürünler" />
+      <Banner image={ProductImg} title="Ürünler" />
       <div className="relative w-full h-auto">
-        <div className="flex justify-center items-center px-36 relative w-full top-[-200px] max-lg:top-[-80px] max-md:top-0 max-md:my-10 max-xl:px-14 max-md:px-2 max-xl:relative">
-          <div className="w-full grid grid-cols-4 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2">
+        <div className="flex justify-center items-center px-48 relative w-full top-[-150px] max-lg:top-[-80px] max-md:top-0 max-md:my-10 max-xl:px-14 max-md:px-2 max-xl:relative">
+          <div className="w-full grid grid-cols-2 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-16 px-48 max-2xl:px-14 max-md:px-2">
             {data?.map((item, i) => (
               <div
-                className="cursor-pointer h-auto bg-white flex justify-start items-center flex-col shadow-ems hover:scale-[1.08] transition delay-150"
+                className="cursor-pointer h-auto bg-white flex justify-start items-center flex-col shadow-ems hover:scale-[1.08] ease-in transition delay-150"
                 onClick={() => navigate(`/ürünler/${item.slug}`)}
                 onMouseEnter={() => setYellow(item.id)}
                 onMouseLeave={() => setYellow()}
               >
-                <img
-                  className="object-cover h-96  w-full"
-                  src={item.image[0]}
-                  alt="ürün"
-                />
-                <div
-                  className={
-                    yellow === item.id
-                      ? 'absolute bg-[#fdab0c] opacity-30 w-full h-96'
-                      : 'hidden absolute bg-[#fdab0c] opacity-30 w-full h-96'
-                  }
-                />
-                <div className="px-5 pt-10 pb-14">
-                  <p className="text-lg font-extrabold">{item.title}</p>
-                  <p className="text-base font-light mt-4 text-stone-900">
+                <div className="w-full relative flex justify-center items-center">
+                  <img className="w-full" src={item.image[0]} alt="ürün" />
+                  <p
+                    className={
+                      yellow !== item.id
+                        ? 'absolute z-50 text-2xl text-white font-bold text-center'
+                        : 'hidden'
+                    }
+                  >
+                    {item.title}
+                  </p>
+                  <div
+                    className={
+                      yellow === item.id
+                        ? 'hidden'
+                        : 'absolute bg-[#343280] opacity-70 w-full h-full z-40 top-0'
+                    }
+                  />
+                </div>
+
+                <div className="px-5 pt-8 pb-10">
+                  <p className="text-lg font-medium mt-4 opacity-50">
                     {item.description.slice(0, 150)}
                   </p>
                 </div>

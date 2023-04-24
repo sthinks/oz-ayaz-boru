@@ -2,34 +2,30 @@ import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/header/logo.png'
+import LogoBlack from '../../assets/ozayaz/logoo.png'
+import { useEffect, useState } from 'react'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Header() {
+  const [navItem, setNavItem] = useState(' ')
   const slug = window.location.pathname
-
+  useEffect(() => {
+    setNavItem(slug)
+  }, [slug])
   const navigation = [
     { name: 'Anasayfa', href: '/' },
-    { name: 'Ürünler', href: '/ürünler' },
-    { name: 'Kurumsal', href: '/kurumsal' },
-    { name: 'Referanslar', href: '/referanslar' },
-    { name: 'Teknik Bilgi', href: '/teknik-bilgi' },
-    { name: 'Duyurular', href: '/duyurular' },
+    { name: 'Hakkımızda', href: '/hakkimizda' },
+    { name: 'Ürünlerimiz', href: '/urunler' },
     { name: 'İletişim', href: '/iletisim' },
-    { name: 'E-Katalog', href: '/e-katalog' },
-    { name: 'Kalite ve Belgeler', href: '/kalite-ve-belgeler' },
   ]
 
   return (
     <Disclosure
       as="nav"
-      className={`${
-        slug != '/'
-          ? ' bg-white'
-          : 'sm:bg-[#ffffff82] sm:top-0 z-50 w-full bg-[#fdab0c]'
-      }`}
+      className="absolute top-0 z-50 w-full max-sm:relative max-sm:bg-white"
     >
       {({ open }) => (
         <>
@@ -52,15 +48,15 @@ export default function Header() {
                   )}
                 </Disclosure.Button>
                 <img
-                  className="block lg:hidden h-12"
-                  src={Logo}
-                  alt="Your Company"
+                  className="block lg:hidden h-8"
+                  src={LogoBlack}
+                  alt="Özayaz boru"
                 />
               </div>
               <div className="flex items-center justify-center sm:items-stretch sm:justify-around text-[#191919] font-semibold w-full">
                 <div className="hidden sm:ml-6 sm:block w-[85%] max-xl:w-full">
-                  <div className="flex justify-around items-center max-xl:text-sm">
-                    <div className="flex flex-shrink-0 items-center max-xl:w-32">
+                  <div className="flex justify-between items-center max-xl:text-sm max-lg:px-10 max-xl:px-10">
+                    <div className="flex flex-shrink-0 items-center max-xl:w-32 w-52">
                       <a href="/">
                         <img
                           className="block w-auto lg:hidden"
@@ -76,39 +72,46 @@ export default function Header() {
                         />
                       </a>
                     </div>
-                    <a className="text-base font-light" href="/">
-                      Anasayfa
-                    </a>
-                    <a className="text-base font-light" href="/ürünler">
-                      Ürünler
-                    </a>
-                    <a className="text-base font-light" href="/kurumsal">
-                      Kurumsal
-                    </a>
-                    <a className="text-base font-light" href="/referanslar">
-                      Referanslar
-                    </a>
-                    <a className="text-base font-light" href="/teknik-bilgi">
-                      Teknik Bilgi
-                    </a>
-                    <a className="text-base font-light" href="/duyurular">
-                      Duyurular
-                    </a>
-                    <a className="text-base font-light" href="/iletisim">
-                      İletişim
-                    </a>
-                    <div className="mx-3">
+                    <div className="w-full flex justify-end items-center text-white gap-32 max-lg:gap-12">
                       <a
-                        className="mx-1 shadow rounded-sm p-1 hover:shadow-xl transition duration-150 text-base font-light"
-                        href="/e-katalog"
+                        className={
+                          navItem === '/'
+                            ? 'text-base font-medium'
+                            : 'text-base font-light'
+                        }
+                        href="/"
                       >
-                        E-Katalog
+                        Anasayfa
                       </a>
                       <a
-                        className="mx-1 shadow rounded-sm p-1 hover:shadow-xl transition duration-150 text-base font-light"
-                        href="/kalite-ve-belgeler"
+                        className={
+                          navItem === '/hakkimizda'
+                            ? 'text-base font-medium'
+                            : 'text-base font-light'
+                        }
+                        href="/hakkimizda"
                       >
-                        Kalite ve Belgeler
+                        Hakkımızda
+                      </a>
+                      <a
+                        className={
+                          navItem === '/urunler'
+                            ? 'text-base font-medium'
+                            : 'text-base font-light'
+                        }
+                        href="/urunler"
+                      >
+                        Ürünlerimiz
+                      </a>
+                      <a
+                        className={
+                          navItem === '/iletisim'
+                            ? 'text-base font-medium'
+                            : 'text-base font-light'
+                        }
+                        href="/iletisim"
+                      >
+                        İletişim
                       </a>
                     </div>
                   </div>

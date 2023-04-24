@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Factory;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -57,9 +58,17 @@ class ProductController extends Controller
     public function getProductId($slug)
     {
         $data = Product::where('slug', $slug)->first();
-
+        $array = json_decode($data->pdf, true);
+        $data->pdf = array_map(function ($file) {
+            $file['download_link'] =
+                url('storage/') .
+                '/' .
+                str_replace('\\', '/', $file['download_link']);
+            return $file;
+        }, $array);
         if ($data->image) {
             $images = json_decode($data->image);
+
             $data->image = collect($images)
                 ->map(function ($image) {
                     return url(
@@ -70,7 +79,48 @@ class ProductController extends Controller
         } else {
             $data->image = null;
         }
+         if ($data->image_detail) {
+            $data->image_detail = url(
+                sprintf(
+                    'storage/%s',
+                    str_replace('\\', '/', $data->image_detail)
+                )
+            );
+        } else {
+            $data->image_detail = null;
+        }
 
+        $data->banner = url(
+            sprintf('storage/%s', str_replace('\\', '/', $data->banner))
+        );
+
+        return response()->json($data);
+    }
+    public function getFactory()
+    {
+        $data = Factory::all();
+        $data->each(function ($item) {
+            if ($item->image) {
+                $images = json_decode($item->image);
+                $item->image = collect($images)
+                    ->map(function ($image, $key) {
+                        return [
+                            $key + 1 => url(
+                                sprintf(
+                                    'storage/%s',
+                                    str_replace('\\', '/', $image)
+                                )
+                            ),
+                        ];
+                    })
+                    ->reduce(function ($carry, $item) {
+                        return array_merge($carry, $item);
+                    }, []);
+            } else {
+                $item->image = null;
+            }
+            return $item;
+        });
         return response()->json($data);
     }
 }

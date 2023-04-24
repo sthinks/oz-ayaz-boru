@@ -3,9 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/announcement', [
+Route::get('/blog-announcement', [
     \App\Http\Controllers\AnnouncementController::class,
     'getAnnouncement',
+]);
+Route::get('/blog-announcement/{slug}', [
+    \App\Http\Controllers\AnnouncementController::class,
+    'getBlogId',
 ]);
 Route::get('/references', [
     \App\Http\Controllers\BaseController::class,
@@ -33,6 +37,10 @@ Route::get('/products', [
     \App\Http\Controllers\ProductController::class,
     'getProduct',
 ]);
+Route::get('/factory', [
+    \App\Http\Controllers\ProductController::class,
+    'getFactory',
+]);
 Route::get('/product', [
     \App\Http\Controllers\ProductController::class,
     'getProductFour',
@@ -48,7 +56,7 @@ Route::get('/catalog', [
 ]);
 Route::post('/contact', [
     \App\Http\Controllers\ContactController::class,
-    'add',
+    'submit',
 ]);
 
 Route::get('/document', [

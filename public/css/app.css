@@ -1,8 +1,5 @@
-@font-face {
-  font-family: 'Myriad Pro', sans-serif;
-  src: url("/fonts/Myriad Pro Bold SemiExtended.ttf?683500a9e2ccb1ee949ebe43c1a40172")
-    format('truetype');
-  font-weight: normal;
-  font-style: normal;
+@import url(https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap);
+* {
+  font-family: 'Jost', sans-serif !important;
 }
 

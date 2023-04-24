@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
-import footer from '../../assets/footerimg.png'
 import Logo from '../../assets/header/logo.png'
 import axiosClient from '../../utils/axiosClient'
 const Footer = () => {
@@ -20,68 +18,75 @@ const Footer = () => {
     getProductHandler()
   }, [])
   return (
-    <footer
-      className="py-24 h-auto"
-      style={{ backgroundImage: `url(${footer})` }}
-    >
-      <div className="px-32  max-xl:px-3">
-        <div>
-          <img src={Logo} alt="Footer-Logo" />
+    <footer className="py-20 h-auto bg-[#343280]">
+      <div className="w-full px-48  max-xl:px-3 grid grid-cols-5 gap-5 max-lg:grid-cols-3 max-sm:grid-cols-2">
+        <div className="w-full h-60 flex justify-center items-start">
+          <ul className="text-white max-md:w-full">
+            <li className="mb-5 text-2xl font-bold">Hakkımızda</li>
+            <li>
+              <a href="/hakkimizda">Biz Kimiz?</a>
+            </li>
+            <li>
+              <a href="/hakkimizda">Misyon</a>
+            </li>
+            <li>
+              <a href="/hakkimizda">Vizyon</a>
+            </li>
+            <li>
+              <a href="/hakkimizda">Üretim Tesisimiz</a>
+            </li>
+            <li>
+              <a href="/hakkimizda">Kalite Anlayışımız</a>
+            </li>
+          </ul>
         </div>
-        <div className="grid grid-cols-4 max-lg:grid-cols-2 w-full mt-16">
-          <div className="">
-            <p className="text-3xl font-bold my-3">Emre Makina</p>
-            <ul>
-              <li>
-                <a href="/Kurumsal">Hakkımızda</a>
-              </li>
-              <li>
-                <a href="/Kurumsal">Misyonumuz</a>
-              </li>
-              <li>
-                <a href="/Kurumsal">Vizyonumuz</a>
-              </li>
-              <li>
-                <a href="/referanslar">İş Ortaklarımız</a>
-              </li>
-            </ul>
-          </div>
-          <div className="">
-            <p className="text-3xl font-bold my-3">Kategoriler</p>
-            <ul>
-              {data?.map((item, i) => (
-                <li>
-                  <a href={`/ürünler/${item.slug}`}> {item.title}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="">
-            <p className="text-3xl font-bold my-3">Çalışma Saatleri</p>
-            <ul>
-              <li>Hafta içi : 09:00 & 17:30</li>
-              <li>Cumartesi: ----</li>
-              <li>Pazar: ----</li>
-            </ul>
-          </div>
-          <div className="">
-            <p className="text-3xl font-bold my-3">İletişime Geçin</p>
-            <ul>
-              <li>
-                Köseler Mahallesi, Mermerciler Sanayi Sitesi 23. Sokak No:11,
-                41455 Dilovası/Kocaeli
-              </li>
-              <li>
-                <a href="tel:+02625023082">0 262 502 30 82-84</a>
-              </li>
-              <li className="break-words">
-                <a href="mailto:info@emremakina.com.tr">
-                  info@emremakina.com.tr
-                </a>
-              </li>
-            </ul>
-          </div>
+        <div className="w-full h-60 flex justify-center items-start">
+          <ul className="text-white max-md:w-full">
+            <li className="mb-5 text-2xl font-bold">Ürünler</li>
+            <li>
+              <a href="/ürünler/mekanik-tesisat-borulari">
+                Mekanik Tesisat Boruları
+              </a>
+            </li>
+            <li>
+              <a href="/ürünler/konstruksiyon-borulari">
+                Konstrüksiyon Boruları
+              </a>
+            </li>
+            <li>
+              <a href="/ürünler/kazan-borulari">Kazan Boruları</a>
+            </li>
+            <li>
+              <a href="/ürünler/kare-ve-kutu-profiller">
+                Kare ve Kutu Profiller
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="w-full h-60 flex justify-center items-start">
+          <ul className="text-white max-md:w-full">
+            <li className="mb-5 text-2xl font-bold">KVKK</li>
+            <li>Kvkk</li>
+          </ul>
+        </div>
+        <div className="w-full h-60 flex justify-center items-start">
+          <ul className="text-white max-md:w-full">
+            <li className="mb-5 text-2xl font-bold">Blog & Haberler</li>
+            <li>
+              <a href="/blog">Blog</a>
+            </li>
+            <li>
+              <a href="/blog">Haberler</a>
+            </li>
+          </ul>
+        </div>
+        <div className="w-full h-60 flex justify-center items-start">
+          <ul className="text-white max-md:w-full">
+            <li className="mb-5 text-2xl font-bold">İletişim</li>
+            <li>
+              <a href="/iletisim">İletişim</a>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

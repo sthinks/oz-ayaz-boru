@@ -15,6 +15,8 @@ import Referance from '../pages/referance/Referance'
 import Technical from '../pages/technical/Technical'
 import ProductDetail from '../pages/productDetail/ProductDetail'
 import Bussines from '../pages/bussinesPartner/Bussines'
+import Blog from '../pages/blog/Blog'
+import BlogDetail from '../pages/blogDetail/BlogDetail'
 
 function Rotate() {
   return (
@@ -25,10 +27,12 @@ function Rotate() {
         <Route path="/referanslar" element={<Referance />} />
         <Route path="/duyurular" element={<Announcement />} />
         <Route path="/teknik-bilgi" element={<Technical />} />
-        <Route path="/kurumsal" element={<About />} />
-        <Route path="/ürünler" element={<Product />} />
+        <Route path="/hakkimizda" element={<About />} />
+        <Route path="/urunler" element={<Product />} />
         <Route path="/ürünler/:slug" element={<ProductDetail />} />
         <Route path="/iletisim" element={<Contact />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/e-katalog" element={<Catalog />} />
         <Route path="/kalite-ve-belgeler" element={<Document />} />
         <Route path="*" element={<NotFound />} />

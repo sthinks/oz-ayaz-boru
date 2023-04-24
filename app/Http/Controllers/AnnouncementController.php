@@ -25,4 +25,12 @@ class AnnouncementController extends Controller
 
         return response()->json($data);
     }
+    public function getBlogId($slug)
+    {
+        $data = Announcement::where('slug', $slug)->first();
+        $data->image = url(
+            sprintf('storage/%s', str_replace('\\', '/', $data->image))
+        );
+        return response()->json($data);
+    }
 }

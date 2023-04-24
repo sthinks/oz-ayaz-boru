@@ -33,7 +33,7 @@ function Announcement() {
     <Loading />
   ) : (
     <>
-      <Banner image={DuyuruImg} title="Duyurular" />
+      <Banner image={DuyuruImg} titleSecond={null} />
       <div className="w-full flex justify-start items-center my-24 max-sm:mt-5">
         <div className="w-full px-48 max-xl:px-24 max-md:px-10 max-sm:px-2">
           {data?.map((item, i) => (

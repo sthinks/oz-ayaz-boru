@@ -1,116 +1,90 @@
 import React, { useState, useEffect } from 'react'
-import AboutBanner from '../../assets/about.png'
+import AboutBanner from '../../assets/ozayaz/aboutus.png'
 import Banner from '../../components/banner/Banner'
 import axiosClient from '../../utils/axiosClient'
 import Loading from '../../components/loading/Loading'
+import Bizkim from '../../assets/ozayaz/weare.png'
+import Misyon from '../../assets/ozayaz/misyon.png'
+import Tesis from '../../assets/ozayaz/factory.png'
+import Kalite from '../../assets/ozayaz/kalite.png'
+import Vizyon from '../../assets/ozayaz/vizyon.png'
 function About() {
-  const [referance, setReferance] = useState()
   const [loading, setLoading] = useState(false)
-  const getRefHandler = async () => {
-    await axiosClient
-      .get(`/referance`)
-      .then(function (response) {
-        setReferance(response.data)
-        setLoading(true)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
-
+  //Fake Loading
   useEffect(() => {
-    getRefHandler()
+    setTimeout(() => {
+      setLoading(true)
+    }, 1000)
   }, [])
   return !loading ? (
     <Loading />
   ) : (
     <>
-      <Banner image={AboutBanner} title="Kurumsal" />
-      <div className="w-full flex justify-center  my-24 max-sm:mt-5 flex-col">
-        <div className="w-[80%] h-auto flex items-center shadow-md shadow-neutral-200 max-xl:w-full  max-sm:flex-col mt-12">
-          <div className="w-2/6 h-72 bg-[#fdab0c] flex justify-center items-center max-lg:h-96 max-sm:w-full max-sm:h-44">
-            <p className="text-4xl font-bold max-md:text-2xl">Kurumsal</p>
-          </div>
-          <div className="w-4/6 h-72 bg-white flex justify-start items-start flex-col p-5 max-lg:h-96 max-sm:h-auto max-sm:p-1 max-sm:w-full max-sm:px-2">
-            <p className="text-base font-bold text">
-              Firmamız EMS EMRE ISI MAKİNALARI İMALAT SAN. TİC. LTD. ŞTİ. olarak
-              1991 senesinden beri ENDÜSTRİYEL FIRIN İMALATI alanında faaliyet
-              göstermektedir.
-            </p>
-            <ul className="mt-5 text-base font-medium">
-              <li>-Isıl İşlem Tesisleri</li>
-              <li>-Tav Fırınları</li>
-              <li>-Atmosfer Kontrollü Fırınlar</li>
-              <li>-Özel Proses Fırınları</li>
-              <li>-Kontinü Isıl İşlem Fırınlar</li>
-              <li>
-                -Metal Sanayinde Kurşun, Zamak, Alüminyum ve Pirinç ergitme
-                fırınları,
-              </li>
-              <li>
-                -Sıcak şekillendirme fırınları yapılmakta ve her türlü bakım
-                onarım servisi verilmektedir.
-              </li>
-            </ul>
-          </div>
+      <Banner image={AboutBanner} title="Hakkımızda" />
+      <div className="w-full flex justify-center  my-20 max-sm:mt-5 flex-col">
+        <div className="w-full flex justify-center items-center flex-col py-10 bg-[#F6F6F6]">
+          <img src={Bizkim} alt="Biz kimiz?" />
+
+          <p className="py-1 text-lg font-medium text-center opacity-50  px-60 max-lg:px-24 max-sm:px-4">
+            2021 yılında %100 yerli sermaye ile kurulan Özayaz Boru, hem
+            Türkiye'de hem de yurt dışında bulunduğu sektörde en büyük
+            tedarikçiler arasında yer almayı hedeflemektedir.
+          </p>
         </div>
-
-        <div className="w-full h-auto flex items-center shadow-md shadow-neutral-200   max-sm:flex-col mt-12">
-          <div className="w-2/6 h-96 bg-[#fdab0c] flex justify-center items-center max-lg:h-96 max-sm:w-full max-sm:h-44">
-            <p className="text-4xl font-bold px-10 text-center max-md:text-2xl max-sm:px-0">
-              MİSYONUMUZ VE VİZYONUMUZ
-            </p>
-          </div>
-          <div className="w-3/4 h-96 bg-[#fdab0c] flex justify-start items-start  p-5 max-md:h-96 max-sm:h-auto max-lg:p-1 max-sm:w-full max-sm:px-2 max-sm:flex-col max-sm:flex max-sm:justify-center max-sm:items-center">
-            <div className="w-full h-full flex justify-start items-center max-sm:w-full">
-              <div className="w-[75%] px-5 max-sm:w-full max-sm:my-3">
-                <p className="text-lg font-bold my-2 max-md:text-2xl">
-                  MİSYONUMUZ
-                </p>
-                <p className="font-medium text-stone-700">
-                  Farklılıklar yaratarak dünya kalite ve standartları üzerinde
-                  ürün ve hizmet sunarak kalıcı üstünlükler sağlamak.
-                </p>
-
-                <p className="text-lg font-bold my-2">VİZYONUMUZ</p>
-                <p className="font-medium text-stone-700">
-                  Üstün iş ahlakı ile dürüst çalışma ilkeleri doğrultusunda
-                  rekabetçi ve sürdürülebilir potansiyeli olan portföyü ülke
-                  ekonomisine değer katacak ve farklılıklar yaratacak şekilde
-                  yönetmek.
-                </p>
+        <div className="w-full flex justify-between items-center my-8 max-sm:flex-col">
+          <div className="w-[49%] max-sm:w-full bg-[#343280] h-80 p-8 flex justify-end items-center max-sm:p-2">
+            <div className="flex justify-around items-end flex-col h-full max-sm:w-full max-sm:items-center max-sm:justify-center">
+              <div>
+                <img src={Vizyon} alt="Vizyon" />
+                <p className="my-2 text-2xl font-bold text-white">Vizyon</p>
               </div>
+
+              <p className="text-white font-normal text-lg max-sm:text-center">
+                Sektörde, Türkiye’nin bir numaralı,
+                <br />
+                <span>dünyanın sayılı boru tedarik şirketi olmak</span>
+              </p>
+            </div>
+          </div>
+          <div className="w-[49%] max-sm:w-full bg-[#343280] h-80 p-8  flex justify-start items-center max-sm:mt-2  max-sm:p-2">
+            <div className="flex justify-around items-start flex-col h-full max-sm:w-full max-sm:items-center max-sm:justify-center">
+              <div>
+                <img src={Misyon} alt="Misyon" />
+                <p className="my-2 text-2xl font-bold text-white">Misyon</p>
+              </div>
+
+              <p className="text-white font-normal text-lg max-sm:text-center">
+                <span>Rekabetçi ve sürdürülebilir büyüme</span>
+                <br />
+                <span>potansiyeli olan “üretim gücünü” stratejik </span>
+                <br />
+                <span>portföyü ile doğru şekilde yönetmek</span>
+                <br />
+              </p>
             </div>
           </div>
         </div>
-
-        <div className="w-[80%] h-auto flex items-center shadow-md shadow-neutral-200 max-xl:w-full  max-sm:flex-col mt-12">
-          <div className="w-2/6 h-96 bg-[#fdab0c] flex justify-center items-center max-md:h-96 max-sm:w-full max-sm:h-44">
-            <p className="text-4xl font-bold text-center max-md:text-2xl">
-              İŞ ORTAKLARIMIZ
-            </p>
-          </div>
-          <div className="w-4/6 h-96 bg-white flex justify-start items-start  p-5 max-md:h-96 max-sm:h-auto max-lg:p-1 max-sm:w-full max-sm:px-2 max-sm:flex-col max-sm:flex max-sm:justify-center max-sm:items-center">
-            <div className="w-5/6 max-sm:w-full">
-              <div className=" flex flex-wrap justify-center">
-                {referance?.map((item, i) => (
-                  <img
-                    className="w-36 max-xl:w-32 max-md:w-28"
-                    src={item.image}
-                    alt="referance"
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="w-1/6 h-full flex justify-end flex-col max-sm:w-auto">
-              <a
-                className="text-xl font-normal border-b-2 border-orange-200 cursor-pointer hover:scale-[1.08] transition delay-150 text-center"
-                href="/referanslar"
-              >
-                Tüm Referanslar
-              </a>
-            </div>
-          </div>
+        <div className="w-full bg-white flex justify-center items-center flex-col mt-16">
+          <img src={Tesis} alt="Üretim tesismiz" />
+          <p className="my-2 text-2xl font-bold opacity-60">Üretim Tesisimiz</p>
+          <p className="py-1 text-lg font-medium text-center opacity-50  px-60 max-lg:px-24 max-sm:px-4">
+            12.000 m2'si kapalı olmak üzere toplamda 20.000 m2 alan üzerine
+            kurulu üretim tesisimiz ile hizmetinizdeyiz.
+          </p>
+        </div>
+        <div className="w-full bg-[#F6F6F6] flex justify-center items-center flex-col mt-16 py-10">
+          <img src={Kalite} alt="Üretim tesismiz" />
+          <p className="my-2 text-2xl font-bold opacity-60">
+            Kalite Anlayışımız
+          </p>
+        </div>
+        <div className="w-full bg-white flex justify-center items-center flex-col mt-16">
+          <p className="py-1 text-lg font-medium text-center opacity-50  px-72 max-lg:px-24 max-sm:px-4">
+            Kalite ve standardizasyon bizim için çok önemlidir. Bu yüzden
+            nitelikli ve eğitimli ekibimiz tarafından, üretim hattımızdan çıkan
+            her ürün gerekli tüm analiz ve testler yapılarak titizlikle kontrol
+            edilir.
+          </p>
         </div>
       </div>
     </>
