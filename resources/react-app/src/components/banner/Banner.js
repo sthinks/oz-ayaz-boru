@@ -1,5 +1,5 @@
-import React from 'react'
-import aab from '../../assets/aa.png'
+import React from "react";
+import aab from "../../assets/aa.png";
 function Banner({ image, title, titleSecond }) {
   return (
     <div className="w-auto h-auto flex justify-start items-center relative">
@@ -9,7 +9,7 @@ function Banner({ image, title, titleSecond }) {
         src={image}
         alt=""
       />
-      {titleSecond === 'null' ? (
+      {titleSecond === "null" ? (
         <div className="absolute bg-[#343280] opacity-70 w-full h-full top-0" />
       ) : (
         <div className="absolute text-white w-full px-36 max-lg:px-24 max-md:px-5">
@@ -29,7 +29,7 @@ function Banner({ image, title, titleSecond }) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default Banner
+export default Banner;

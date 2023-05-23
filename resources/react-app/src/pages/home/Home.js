@@ -1,55 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import Banner from '../../components/banner/Banner'
-import pImg from '../../assets/fırın.png'
-import fırın from '../../assets/fırın2.png'
-import Kurumsal from '../../assets/home-copryt.png'
-import ReactPlayer from 'react-player'
-import axiosClient from '../../utils/axiosClient'
-import BannerImg from '../../assets/ozayaz/homebanner.png'
-import Loading from '../../components/loading/Loading'
-import aboutus from '../../assets/ozayaz/wearehow.png'
-import misyon from '../../assets/ozayaz/misyonblack.png'
-import vizyon from '../../assets/ozayaz/vizyonblack.png'
-import factory from '../../assets/ozayaz/factory.png'
-import kalite from '../../assets/ozayaz/kalite.png'
-import homeboru from '../../assets/ozayaz/homeboru.png'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
+import axiosClient from "../../utils/axiosClient";
+import BannerImg from "../../assets/ozayaz/homebanner.png";
+import Loading from "../../components/loading/Loading";
+import aboutus from "../../assets/ozayaz/wearehow.png";
+import misyon from "../../assets/ozayaz/misyonblack.png";
+import vizyon from "../../assets/ozayaz/vizyonblack.png";
+import factory from "../../assets/ozayaz/factory.png";
+import kalite from "../../assets/ozayaz/kalite.png";
+import homeboru from "../../assets/ozayaz/homeboru.png";
+import { useNavigate } from "react-router-dom";
+
 function Home() {
-  const navigate = useNavigate()
-  const [blog, setBlog] = useState([])
-  const [product, setProduct] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [yellow, setYellow] = useState()
+  const navigate = useNavigate();
+  const [blog, setBlog] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [yellow, setYellow] = useState();
   const getRefHandler = async () => {
     await axiosClient
       .get(`/blog-announcement`)
       .then(function (response) {
-        setBlog(response.data)
+        setBlog(response.data);
         if (response.data) {
-          setTimeout(setLoading(false), 1000)
+          setTimeout(setLoading(false), 1000);
         }
       })
       .catch(function (error) {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   const getProductHandler = async () => {
     await axiosClient
       .get(`/products`)
       .then(function (response) {
-        setProduct(response.data)
-        console.log(response.data)
+        setProduct(response.data);
+        console.log(response.data);
       })
       .catch(function (error) {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
-    getRefHandler()
-    getProductHandler()
-  }, [])
+    getRefHandler();
+    getProductHandler();
+  }, []);
 
   return loading ? (
     <Loading />
@@ -89,8 +86,8 @@ function Home() {
                   <div
                     className={
                       yellow !== item.id
-                        ? 'absolute bg-[#343280] opacity-70 w-full h-full top-0'
-                        : 'hidden'
+                        ? "absolute bg-[#343280] opacity-70 w-full h-full top-0"
+                        : "hidden"
                     }
                   />
                 </div>
@@ -114,7 +111,17 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="flex justify-start items-center flex-col">
+      <div className="w-full h-screen max-xl:h-[600px] max-md:h-[300px] ">
+        <ReactPlayer
+          className=" px-48 max-xl:px-24  max-md:px-5 "
+          width="100%"
+          height="100%"
+          playIcon
+          controls="true"
+          url="https://www.youtube.com/watch?v=EbPG0d5AdrE"
+        />
+      </div>
+      <div className="flex justify-start items-center flex-col mt-20">
         <p className="text-6xl font-light">KURUMSAL</p>
         <div className="mt-5 w-full h-auto relative flex justify-center items-center bg-[#F6F6F6]">
           <div className="z-50 flex flex-wrap justify-center items-center px-4 py-28 gap-10 max-2xl:px-12 max-xl:px-2 max-xl:py-24  max-md:py-4  max-md:gap-10 max-xl:grid-cols-3 max-sm:grid-cols-1 max-sm:py-12">
@@ -224,7 +231,7 @@ function Home() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

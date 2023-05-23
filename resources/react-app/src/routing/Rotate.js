@@ -1,22 +1,22 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Footer from '../components/footer/Footer'
-import Header from '../components/header/Header'
-import Loading from '../components/loading/Loading'
-import NotFound from '../pages/404/NotFound'
-import About from '../pages/about-us/About'
-import Announcement from '../pages/annoucement/Announcement'
-import Catalog from '../pages/catalog/Catalog'
-import Contact from '../pages/contact/Contact'
-import Document from '../pages/document/Document'
-import Home from '../pages/home/Home'
-import Product from '../pages/product/Product'
-import Referance from '../pages/referance/Referance'
-import Technical from '../pages/technical/Technical'
-import ProductDetail from '../pages/productDetail/ProductDetail'
-import Bussines from '../pages/bussinesPartner/Bussines'
-import Blog from '../pages/blog/Blog'
-import BlogDetail from '../pages/blogDetail/BlogDetail'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
+import Loading from "../components/loading/Loading";
+import NotFound from "../pages/404/NotFound";
+import About from "../pages/about-us/About";
+import Announcement from "../pages/annoucement/Announcement";
+import Catalog from "../pages/catalog/Catalog";
+import Contact from "../pages/contact/Contact";
+import Document from "../pages/document/Document";
+import Home from "../pages/home/Home";
+import Product from "../pages/product/Product";
+import Referance from "../pages/referance/Referance";
+import Technical from "../pages/technical/Technical";
+import ProductDetail from "../pages/productDetail/ProductDetail";
+import Bussines from "../pages/bussinesPartner/Bussines";
+import Blog from "../pages/blog/Blog";
+import BlogDetail from "../pages/blogDetail/BlogDetail";
 
 function Rotate() {
   return (
@@ -39,7 +39,7 @@ function Rotate() {
       </Routes>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Rotate
+export default Rotate;

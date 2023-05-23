@@ -1,37 +1,38 @@
-import { Disclosure } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
-import Logo from '../../assets/header/logo.png'
-import LogoBlack from '../../assets/ozayaz/logoo.png'
-import { useEffect, useState } from 'react'
+import { Disclosure } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import Logo from "../../assets/header/logo.png";
+import LogoBlack from "../../assets/ozayaz/logoo.png";
+import { useEffect, useState } from "react";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Header() {
-  const [navItem, setNavItem] = useState(' ')
-  const slug = window.location.pathname
+  const [navItem, setNavItem] = useState(" ");
+  const slug = window.location.pathname;
   useEffect(() => {
-    setNavItem(slug)
-  }, [slug])
+    setNavItem(slug);
+  }, [slug]);
   const navigation = [
-    { name: 'Anasayfa', href: '/' },
-    { name: 'Hakkımızda', href: '/hakkimizda' },
-    { name: 'Ürünlerimiz', href: '/urunler' },
-    { name: 'İletişim', href: '/iletisim' },
-  ]
+    { name: "Anasayfa", href: "/" },
+    { name: "Hakkımızda", href: "/hakkimizda" },
+    { name: "Ürünlerimiz", href: "/urunler" },
+    { name: "Katalog", href: "/katalog" },
+    { name: "İletişim", href: "/iletisim" },
+  ];
 
   return (
     <Disclosure
       as="nav"
-      className="absolute top-0 z-50 w-full max-sm:relative max-sm:bg-white"
+      className="absolute top-0 z-50 w-full max-sm:relative max-md:bg-white"
     >
       {({ open }) => (
         <>
           <div className="mx-auto px-2   max-xl:mx-0 max-xl:px-0 ">
             <div className="relative flex sm:h-20 h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden justify-between w-full px-6">
+              <div className="absolute inset-y-0 left-0 flex items-center md:hidden justify-between w-full px-6">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center border-2 border-slate-900 rounded-md p-2 text-slate-700 ring-2 ring-inset ring-white">
                   <span className="sr-only">Open main menu</span>
@@ -54,7 +55,7 @@ export default function Header() {
                 />
               </div>
               <div className="flex items-center justify-center sm:items-stretch sm:justify-around text-[#191919] font-semibold w-full">
-                <div className="hidden sm:ml-6 sm:block w-[85%] max-xl:w-full">
+                <div className="hidden sm:ml-6 md:block w-[85%] max-xl:w-full">
                   <div className="flex justify-between items-center max-xl:text-sm max-lg:px-10 max-xl:px-10">
                     <div className="flex flex-shrink-0 items-center max-xl:w-32 w-52">
                       <a href="/">
@@ -75,9 +76,9 @@ export default function Header() {
                     <div className="w-full flex justify-end items-center text-white gap-32 max-lg:gap-12">
                       <a
                         className={
-                          navItem === '/'
-                            ? 'text-base font-medium'
-                            : 'text-base font-light'
+                          navItem === "/"
+                            ? "text-base font-medium"
+                            : "text-base font-light"
                         }
                         href="/"
                       >
@@ -85,9 +86,9 @@ export default function Header() {
                       </a>
                       <a
                         className={
-                          navItem === '/hakkimizda'
-                            ? 'text-base font-medium'
-                            : 'text-base font-light'
+                          navItem === "/hakkimizda"
+                            ? "text-base font-medium"
+                            : "text-base font-light"
                         }
                         href="/hakkimizda"
                       >
@@ -95,9 +96,9 @@ export default function Header() {
                       </a>
                       <a
                         className={
-                          navItem === '/urunler'
-                            ? 'text-base font-medium'
-                            : 'text-base font-light'
+                          navItem === "/urunler"
+                            ? "text-base font-medium"
+                            : "text-base font-light"
                         }
                         href="/urunler"
                       >
@@ -105,9 +106,19 @@ export default function Header() {
                       </a>
                       <a
                         className={
-                          navItem === '/iletisim'
-                            ? 'text-base font-medium'
-                            : 'text-base font-light'
+                          navItem === "/urunler"
+                            ? "text-base font-medium"
+                            : "text-base font-light"
+                        }
+                        href="/katalog"
+                      >
+                        Katalog
+                      </a>
+                      <a
+                        className={
+                          navItem === "/iletisim"
+                            ? "text-base font-medium"
+                            : "text-base font-light"
                         }
                         href="/iletisim"
                       >
@@ -120,7 +131,7 @@ export default function Header() {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
                 <Disclosure.Button
@@ -137,5 +148,5 @@ export default function Header() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }

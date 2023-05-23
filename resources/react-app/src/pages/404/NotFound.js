@@ -1,16 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import BannerImg from "../../assets/ozayaz/homebanner.png";
+import { Link } from "react-router-dom";
+import Loading from "../../components/loading/Loading";
 
 function NotFound() {
-  return (
-    <div className="flex justify-center items-center mt-12">
-      <div className="w-full h-[500px] px-24 relative flex justify-center items-center max-md:px-3">
-        <div className="bg-[#fdab0c] w-full h-full opacity-80" />
-        <p className="text-3xl font-bold absolute max-md:px-5">
-          Aradığınız sayfa bulunamadı
-        </p>
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+  return loading ? (
+    <Loading />
+  ) : (
+    <>
+      <div className="w-auto h-auto flex justify-start items-center relative">
+        <div className="bg-black opacity-70 w-full h-full absolute" />
+        <img
+          className="w-full max-sm:h-[300px] object-cover"
+          src={BannerImg}
+          alt=""
+        />
+
+        <div className="absolute text-white w-full px-36 max-lg:px-24 max-md:px-12">
+          <p className="text-9xl max-xl:text-6xl max-md:text-4xl max-sm:text-2xl font-semibold mb-14 max-md:pt-6 ">
+            404
+            <br />
+            <span className="text-6xl  max-xl:text-3xl  max-md:text-2xl max-sm:text-xl font-light max-md:pb-6">
+              Üzgünüz, aradığınız sayfa bulunamadı.
+            </span>
+            <br />
+            <span className="text-3xl  max-md:text-2xl max-sm:text-xl font-light max-md:pb-6 cursor-pointer underline">
+              <Link to="/">Ana sayfaya dön.</Link>
+            </span>
+          </p>
+        </div>
       </div>
-    </div>
-  )
+    </>
+  );
 }
 
-export default NotFound
+export default NotFound;

@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import AboutBanner from '../../assets/ozayaz/aboutus.png'
-import Banner from '../../components/banner/Banner'
-import axiosClient from '../../utils/axiosClient'
-import Loading from '../../components/loading/Loading'
-import Bizkim from '../../assets/ozayaz/weare.png'
-import Misyon from '../../assets/ozayaz/misyon.png'
-import Tesis from '../../assets/ozayaz/factory.png'
-import Kalite from '../../assets/ozayaz/kalite.png'
-import Vizyon from '../../assets/ozayaz/vizyon.png'
+import React, { useState, useEffect } from "react";
+import AboutBanner from "../../assets/ozayaz/aboutus.png";
+import Banner from "../../components/banner/Banner";
+import axiosClient from "../../utils/axiosClient";
+import Loading from "../../components/loading/Loading";
+import Bizkim from "../../assets/ozayaz/weare.png";
+import Misyon from "../../assets/ozayaz/misyon.png";
+import Tesis from "../../assets/ozayaz/factory.png";
+import Kalite from "../../assets/ozayaz/kalite.png";
+import Vizyon from "../../assets/ozayaz/vizyon.png";
+import FactorySlider from "../../components/factorySlider/FactorySlider";
 function About() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   //Fake Loading
   useEffect(() => {
     setTimeout(() => {
-      setLoading(true)
-    }, 1000)
-  }, [])
+      setLoading(true);
+    }, 1000);
+  }, []);
   return !loading ? (
     <Loading />
   ) : (
@@ -72,6 +73,7 @@ function About() {
             kurulu üretim tesisimiz ile hizmetinizdeyiz.
           </p>
         </div>
+        <FactorySlider />
         <div className="w-full bg-[#F6F6F6] flex justify-center items-center flex-col mt-16 py-10">
           <img src={Kalite} alt="Üretim tesismiz" />
           <p className="my-2 text-2xl font-bold opacity-60">
@@ -88,7 +90,7 @@ function About() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default About
+export default About;

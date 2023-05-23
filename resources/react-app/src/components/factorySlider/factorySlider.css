@@ -15,9 +15,7 @@
   margin-left: 5px;
   margin-right: 5px;
 }
-.slick-track {
-  height: 500px;
+.slick-track{
+  height: 200px;
 }
-.slick-list {
-  height: 450px;
-}
+

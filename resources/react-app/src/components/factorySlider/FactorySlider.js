@@ -1,29 +1,29 @@
-import React, { useState, useRef } from 'react'
-import Slider from 'react-slick'
-import axiosClient from '../../utils/axiosClient'
-import { useEffect } from 'react'
-import './factorySlider.css'
-import { GrClose } from 'react-icons/gr'
+import React, { useState, useRef } from "react";
+import Slider from "react-slick";
+import axiosClient from "../../utils/axiosClient";
+import { useEffect } from "react";
+import "./factorySlider.css";
+import { GrClose } from "react-icons/gr";
 function FactorySlider() {
-  const [image, setImage] = useState([])
-  const [modal, setModal] = useState(false)
-  const [clickImage, setClickImage] = useState()
-  const imageRef = useRef()
+  const [image, setImage] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [clickImage, setClickImage] = useState();
+  const imageRef = useRef();
   const getImageHandler = async () => {
     await axiosClient
       .get(`/factory`)
       .then(function (response) {
-        console.log(response.data)
-        setImage(response.data[0].image)
+        console.log(response.data);
+        setImage(response.data[0].image);
       })
       .catch(function (error) {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
-    getImageHandler()
-  }, [])
+    getImageHandler();
+  }, []);
   const settings = {
     dots: true,
     infinite: true,
@@ -45,9 +45,9 @@ function FactorySlider() {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
           arrows: false,
           dots: false,
         },
@@ -55,28 +55,28 @@ function FactorySlider() {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           arrows: false,
           dots: false,
         },
       },
     ],
-  }
+  };
   const imageHandler = (item) => {
-    setClickImage(item)
-  }
+    setClickImage(item);
+  };
   useEffect(() => {
     const closeDropdown = (e) => {
       if (
-        e.target.className === 'bg-black opacity-70 w-full h-full absolute z-40'
+        e.target.className === "bg-black opacity-70 w-full h-full absolute z-40"
       ) {
-        setModal(false)
+        setModal(false);
       }
-    }
-    document.body.addEventListener('click', closeDropdown)
-    return () => document.body.removeEventListener('click', closeDropdown)
-  }, [])
+    };
+    document.body.addEventListener("click", closeDropdown);
+    return () => document.body.removeEventListener("click", closeDropdown);
+  }, []);
   return (
     image && (
       <>
@@ -107,8 +107,8 @@ function FactorySlider() {
                 <img
                   className="w-96 h-96 object-cover mx-3 cursor-pointer"
                   onDoubleClick={() => {
-                    setModal(!modal)
-                    imageHandler(item)
+                    setModal(!modal);
+                    imageHandler(item);
                   }}
                   src={item}
                   key={i}
@@ -120,7 +120,7 @@ function FactorySlider() {
         </div>
       </>
     )
-  )
+  );
 }
 
-export default FactorySlider
+export default FactorySlider;

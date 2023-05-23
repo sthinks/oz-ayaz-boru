@@ -25,3 +25,6 @@ Route::group(['prefix' => 'admin'], function () {
 Route::any('/{any}', function () {
     return view('welcome');
 })->where('any', '^(?!api\/)[\/\w\.-]*');
+
+Route::redirect('/katalog', '/documents/katalog.pdf');
+
