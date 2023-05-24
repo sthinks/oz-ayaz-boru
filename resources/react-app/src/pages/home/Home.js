@@ -71,18 +71,22 @@ function Home() {
         </div>
       </div>
       <div className="relative w-full h-auto">
-        <div className="flex justify-center items-center px-36 relative w-full top-[-200px] max-lg:top-[-80px] max-md:top-0 max-md:my-10 max-xl:px-14 max-md:px-2 max-xl:relative">
+        <div className="flex justify-center items-center px-36 relative w-full top-[-200px] max-lg:top-[-80px] max-md:top-0 max-md:my-10 max-xl:px-14  max-md:px-6 max-xl:relative">
           <div className="w-full grid grid-cols-4 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-8">
             {product?.map((item, i) => (
               <div
                 key={i}
-                className="relative cursor-pointer h-auto bg-white flex justify-between items-center flex-col shadow-ems hover:scale-[1.08] transition delay-150 ease-in"
+                className="relative cursor-pointer h-auto bg-white flex justify-between items-center flex-col shadow-ems hover:scale-[1.08] transition delay-150 ease-in max-md:hover:scale-[1]"
                 onClick={() => navigate(`/ürünler/${item.slug}`)}
                 onMouseEnter={() => setYellow(item.id)}
                 onMouseLeave={() => setYellow()}
               >
                 <div className="relative w-full">
-                  <img className="w-full" src={item.image[0]} alt="ürün" />
+                  <img
+                    className="w-full max-md:h-56"
+                    src={item.image[0]}
+                    alt="ürün"
+                  />
                   <div
                     className={
                       yellow !== item.id

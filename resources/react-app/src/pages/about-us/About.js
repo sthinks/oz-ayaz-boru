@@ -13,6 +13,7 @@ function About() {
   const [loading, setLoading] = useState(false);
   //Fake Loading
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     setTimeout(() => {
       setLoading(true);
     }, 1000);

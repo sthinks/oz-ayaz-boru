@@ -1,6 +1,6 @@
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/header/logo.png";
 import LogoBlack from "../../assets/ozayaz/logoo.png";
 import { useEffect, useState } from "react";
@@ -22,7 +22,7 @@ export default function Header() {
     { name: "Katalog", href: "/katalog" },
     { name: "İletişim", href: "/iletisim" },
   ];
-
+  const navigate = useNavigate();
   return (
     <Disclosure
       as="nav"
@@ -51,6 +51,7 @@ export default function Header() {
                 <img
                   className="block lg:hidden h-8"
                   src={LogoBlack}
+                  onClick={() => navigate("/")}
                   alt="Özayaz boru"
                 />
               </div>
