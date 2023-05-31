@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import axiosClient from "../../utils/axiosClient";
-import BannerImg from "../../assets/ozayaz/homebanner.png";
+import BannerImg from "../../assets/ozayaz/homebanner.webp";
 import Loading from "../../components/loading/Loading";
 import aboutus from "../../assets/ozayaz/wearehow.png";
 import misyon from "../../assets/ozayaz/misyonblack.png";
@@ -47,7 +47,9 @@ function Home() {
     getRefHandler();
     getProductHandler();
   }, []);
-
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return loading ? (
     <Loading />
   ) : (

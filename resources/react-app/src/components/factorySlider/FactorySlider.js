@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import Slider from "react-slick";
 import axiosClient from "../../utils/axiosClient";
 import { useEffect } from "react";
@@ -8,6 +8,7 @@ function FactorySlider() {
   const [image, setImage] = useState([]);
   const [modal, setModal] = useState(false);
   const [clickImage, setClickImage] = useState();
+  const [drag, setDrag] = useState();
   const imageRef = useRef();
   const getImageHandler = async () => {
     await axiosClient
@@ -24,22 +25,23 @@ function FactorySlider() {
   useEffect(() => {
     getImageHandler();
   }, []);
-  const settings = {
-    dots: true,
+  var settings = {
+    dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-
-    initialSlide: 0,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 2,
+    arrow: true,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: true,
-          dots: true,
+          arrow: false,
+          dots: false,
         },
       },
       {
@@ -48,7 +50,7 @@ function FactorySlider() {
           slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 1,
-          arrows: false,
+          arrow: false,
           dots: false,
         },
       },
@@ -57,7 +59,7 @@ function FactorySlider() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          arrows: false,
+          arrow: false,
           dots: false,
         },
       },
@@ -77,6 +79,16 @@ function FactorySlider() {
     document.body.addEventListener("click", closeDropdown);
     return () => document.body.removeEventListener("click", closeDropdown);
   }, []);
+  const dontDragHandler = (pageX, item) => {
+    console.log(pageX);
+    console.log("drag", drag);
+    if (drag !== pageX) {
+      setModal(false);
+    } else {
+      setModal(true);
+      setClickImage(item);
+    }
+  };
   return (
     image && (
       <>
@@ -104,16 +116,21 @@ function FactorySlider() {
           {image && (
             <Slider {...settings}>
               {image?.map((item, i) => (
-                <img
-                  className="w-96 h-96 object-cover mx-3 cursor-pointer"
-                  onDoubleClick={() => {
-                    setModal(!modal);
-                    imageHandler(item);
-                  }}
-                  src={item}
+                <div
                   key={i}
-                  alt="Üretim resimleri"
-                />
+                  className="w-full slider-image-comp  justify-center items-center p-2"
+                >
+                  <div className="w-full h-96 flex justify-center items-center cursor-pointer">
+                    <img
+                      className="w-full h-full object-cover cursor-pointer"
+                      onMouseDown={(e) => setDrag(e.pageX)}
+                      onMouseUp={(e) => dontDragHandler(e.pageX, item)}
+                      src={item}
+                      key={i}
+                      alt="Üretim resimleri"
+                    />
+                  </div>
+                </div>
               ))}
             </Slider>
           )}

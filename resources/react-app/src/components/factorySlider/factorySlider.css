@@ -11,11 +11,13 @@
 .slick-prev {
   left: -40px !important;
 }
-.slick-slide {
-  margin-left: 5px;
-  margin-right: 5px;
-}
+
 .slick-track{
-  height: 200px;
+  height: 400px;
 }
 
+@media only screen and (max-width: 768px) {
+  .slick-arrow  {
+    display: none !important;
+  }
+}

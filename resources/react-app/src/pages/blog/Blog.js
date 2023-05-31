@@ -1,57 +1,60 @@
-import React, { useState, useEffect, useRef } from 'react'
-import Banner from '../../components/banner/Banner'
-import productBanner from '../../assets/product.png'
-import axiosClient from '../../utils/axiosClient'
-import Slider from 'react-slick'
-import ProductImg from '../../assets/ozayaz/aboutus.png'
-import Loading from '../../components/loading/Loading'
-import { AiOutlineClose } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
+import Banner from "../../components/banner/Banner";
+import productBanner from "../../assets/product.png";
+import axiosClient from "../../utils/axiosClient";
+import Slider from "react-slick";
+import ProductImg from "../../assets/ozayaz/aboutus.png";
+import Loading from "../../components/loading/Loading";
+import { AiOutlineClose } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 function Blog() {
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [filterImage, setFilterImage] = useState()
-  const [yellow, setYellow] = useState()
-  const [modal, setModal] = useState(false)
-  const closeScreen = useRef()
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [filterImage, setFilterImage] = useState();
+  const [yellow, setYellow] = useState();
+  const [modal, setModal] = useState(false);
+  const closeScreen = useRef();
   const getProductHandler = async () => {
     await axiosClient
       .get(`/blog-announcement`)
       .then(function (response) {
-        setData(response.data)
-        setLoading(true)
+        setData(response.data);
+        setLoading(true);
       })
       .catch(function (error) {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
-    getProductHandler()
-  }, [])
+    getProductHandler();
+  }, []);
   useEffect(() => {
     const closeDropdown = (e) => {
-      if (e.target.className === 'absolute w-full h-full bg-white py-12') {
-        setModal(false)
+      if (e.target.className === "absolute w-full h-full bg-white py-12") {
+        setModal(false);
       }
-    }
-    document.body.addEventListener('click', closeDropdown)
-    return () => document.body.removeEventListener('click', closeDropdown)
-  }, [])
+    };
+    document.body.addEventListener("click", closeDropdown);
+    return () => document.body.removeEventListener("click", closeDropdown);
+  }, []);
   const filterProduct = (value) => {
-    const result = data?.filter((item) => item.id === value)
-    console.log(result[0].image)
-    setModal(true)
-    setFilterImage(result[0].image)
-  }
+    const result = data?.filter((item) => item.id === value);
+    console.log(result[0].image);
+    setModal(true);
+    setFilterImage(result[0].image);
+  };
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-  }
-  const navigate = useNavigate()
+  };
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const navigate = useNavigate();
   return !loading ? (
     <Loading />
   ) : (
@@ -72,8 +75,8 @@ function Blog() {
                   <p
                     className={
                       yellow !== item.id
-                        ? 'absolute z-50 text-2xl text-white font-bold text-center'
-                        : 'hidden'
+                        ? "absolute z-50 text-2xl text-white font-bold text-center"
+                        : "hidden"
                     }
                   >
                     {item.title}
@@ -81,8 +84,8 @@ function Blog() {
                   <div
                     className={
                       yellow === item.id
-                        ? 'hidden'
-                        : 'absolute bg-[#343280] opacity-70 w-full h-full z-40 top-0'
+                        ? "hidden"
+                        : "absolute bg-[#343280] opacity-70 w-full h-full z-40 top-0"
                     }
                   />
                 </div>
@@ -98,7 +101,7 @@ function Blog() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Blog
+export default Blog;

@@ -1,34 +1,37 @@
-import React, { useState, useEffect } from 'react'
-import Banner from '../../components/banner/Banner'
-import TeknikBilgi from '../../assets/teknik.png'
-import axiosClient from '../../utils/axiosClient'
-import Loading from '../../components/loading/Loading'
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import Banner from "../../components/banner/Banner";
+import TeknikBilgi from "../../assets/teknik.png";
+import axiosClient from "../../utils/axiosClient";
+import Loading from "../../components/loading/Loading";
 function Technical() {
-  const [data, setData] = useState()
-  const [loading, setLoading] = useState()
-  const [open, setOpen] = useState(0)
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState();
+  const [open, setOpen] = useState(0);
   const getRefHandler = async () => {
     await axiosClient
       .get(`/technical-information`)
       .then(function (response) {
-        setData(response.data)
-        console.log(response.data)
-        setLoading(true)
+        setData(response.data);
+        console.log(response.data);
+        setLoading(true);
       })
       .catch(function (error) {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
   const modalHandler = (value) => {
     if (value === open) {
-      setOpen(0)
+      setOpen(0);
     } else {
-      setOpen(value)
+      setOpen(value);
     }
-  }
+  };
   useEffect(() => {
-    getRefHandler()
-  }, [])
+    getRefHandler();
+  }, []);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return !loading ? (
     <Loading />
   ) : (
@@ -50,8 +53,8 @@ function Technical() {
             <div
               className={
                 open != item.id
-                  ? 'hidden w-full bg-[#fdab0c]  justify-center items-center flex-col px-24 py-10 max-md:w-full max-md:px-5'
-                  : 'w-full bg-[#fdab0c] flex justify-center items-center flex-col px-24 py-10 max-md:w-full max-md:px-5'
+                  ? "hidden w-full bg-[#fdab0c]  justify-center items-center flex-col px-24 py-10 max-md:w-full max-md:px-5"
+                  : "w-full bg-[#fdab0c] flex justify-center items-center flex-col px-24 py-10 max-md:w-full max-md:px-5"
               }
             >
               <p className="text-3xl font-bold max-xl:text-xl">{item.title}</p>
@@ -63,7 +66,7 @@ function Technical() {
         ))}
       </div>
     </>
-  )
+  );
 }
 
-export default Technical
+export default Technical;

@@ -1,34 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import Banner from '../../components/banner/Banner'
-import DuyuruImg from '../../assets/duyurular.png'
-import axiosClient from '../../utils/axiosClient'
-import Loading from '../../components/loading/Loading'
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import Banner from "../../components/banner/Banner";
+import DuyuruImg from "../../assets/duyurular.png";
+import axiosClient from "../../utils/axiosClient";
+import Loading from "../../components/loading/Loading";
 function Announcement() {
-  const [data, setData] = useState()
-  const [open, setOpen] = useState(0)
-  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState();
+  const [open, setOpen] = useState(0);
+  const [loading, setLoading] = useState(false);
   const getRefHandler = async () => {
     await axiosClient
       .get(`/announcement`)
       .then(function (response) {
-        setData(response.data)
-        setLoading(true)
+        setData(response.data);
+        setLoading(true);
       })
       .catch(function (error) {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
-    getRefHandler()
-  }, [])
+    getRefHandler();
+  }, []);
   const modalHandler = (value) => {
     if (value === open) {
-      setOpen(0)
+      setOpen(0);
     } else {
-      setOpen(value)
+      setOpen(value);
     }
-  }
+  };
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return !loading ? (
     <Loading />
   ) : (
@@ -51,15 +54,15 @@ function Announcement() {
                 onClick={() => modalHandler(item.id)}
                 className={
                   open === item.id
-                    ? 'hidden w-4/6 h-[350px] object-cover max-md:w-full'
-                    : 'w-4/6 h-[350px] object-cover max-md:w-full absolute bg-[#fdab0c] opacity-50 cursor-pointer'
+                    ? "hidden w-4/6 h-[350px] object-cover max-md:w-full"
+                    : "w-4/6 h-[350px] object-cover max-md:w-full absolute bg-[#fdab0c] opacity-50 cursor-pointer"
                 }
               />
               <div
                 className={
                   open === item.id
-                    ? ' w-2/6 h-full bg-[#fdab0c] flex justify-center items-center flex-col p-10 max-md:w-full'
-                    : 'hidden w-2/6 h-full bg-[#fdab0c]  justify-center items-center flex-col p-10 max-md:w-full'
+                    ? " w-2/6 h-full bg-[#fdab0c] flex justify-center items-center flex-col p-10 max-md:w-full"
+                    : "hidden w-2/6 h-full bg-[#fdab0c]  justify-center items-center flex-col p-10 max-md:w-full"
                 }
               >
                 <p className="text-3xl font-bold max-xl:text-xl">
@@ -74,7 +77,7 @@ function Announcement() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Announcement
+export default Announcement;

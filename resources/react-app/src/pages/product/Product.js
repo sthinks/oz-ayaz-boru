@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import Banner from "../../components/banner/Banner";
 import productBanner from "../../assets/product.png";
 import axiosClient from "../../utils/axiosClient";
@@ -52,6 +52,9 @@ function Product() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
   return !loading ? (
     <Loading />

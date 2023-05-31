@@ -1,57 +1,57 @@
-import React, { useState, useEffect, useRef } from 'react'
-import Banner from '../../components/banner/Banner'
-import productBanner from '../../assets/ozayaz/productdetail.png'
-import axiosClient from '../../utils/axiosClient'
-import Loading from '../../components/loading/Loading'
-import { AiOutlineDownload } from 'react-icons/ai'
-import './product.css'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
+import Banner from "../../components/banner/Banner";
+import productBanner from "../../assets/ozayaz/productdetail.png";
+import axiosClient from "../../utils/axiosClient";
+import Loading from "../../components/loading/Loading";
+import { AiOutlineDownload } from "react-icons/ai";
+import "./product.css";
+import { useParams } from "react-router-dom";
 function ProductDetail() {
-  const slug = useParams()
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [filterImage, setFilterImage] = useState()
-  const [modal, setModal] = useState(false)
-  const closeScreen = useRef()
+  const slug = useParams();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [filterImage, setFilterImage] = useState();
+  const [modal, setModal] = useState(false);
+  const closeScreen = useRef();
   const getProductHandler = async () => {
     await axiosClient
       .get(`/product-detail/${slug.slug}`)
       .then(function (response) {
-        setData(response.data)
-        setLoading(true)
-        console.log(response.data)
+        setData(response.data);
+        setLoading(true);
+        console.log(response.data);
       })
       .catch(function (error) {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
-    getProductHandler()
-  }, [])
+    getProductHandler();
+  }, []);
   useEffect(() => {
     const closeDropdown = (e) => {
       if (
         e.target.className ===
-        'absolute w-full h-full bg-black opacity-30  py-12'
+        "absolute w-full h-full bg-black opacity-30  py-12"
       ) {
-        setModal(false)
-      } else if (e.target.className === 'slick-list') {
-        setModal(false)
+        setModal(false);
+      } else if (e.target.className === "slick-list") {
+        setModal(false);
       } else if (
         e.target.className ===
-        'absolute flex justify-center items-center w-full z-50 top-[100px]'
+        "absolute flex justify-center items-center w-full z-50 top-[100px]"
       ) {
-        setModal(false)
+        setModal(false);
       }
-    }
-    document.body.addEventListener('click', closeDropdown)
-    return () => document.body.removeEventListener('click', closeDropdown)
-  }, [])
+    };
+    document.body.addEventListener("click", closeDropdown);
+    return () => document.body.removeEventListener("click", closeDropdown);
+  }, []);
   const filterProduct = (value) => {
-    setModal(true)
-    setFilterImage(data.image)
-  }
+    setModal(true);
+    setFilterImage(data.image);
+  };
   const settings = {
     dots: true,
     infinite: true,
@@ -59,8 +59,10 @@ function ProductDetail() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-  }
-
+  };
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return !loading ? (
     <Loading />
   ) : (
@@ -79,13 +81,24 @@ function ProductDetail() {
           />
           <div className="absolute bg-[#343280] opacity-90 w-full h-full top-0" />
           <div className="w-full px-60 max absolute top-60 flex justify-center items-start max-xl:px-32 max-lg:px-14 max-md:px-3 max-sm:top-20">
-            <div className="w-2/6 max-md:hidden">
-              <img
-                className="absolute w-[35%] left-[5%] h-[1000px]  object-cover max-md:hidden"
-                src={data?.image}
-                alt="Ürün detay"
-              />
-            </div>
+            {data.image_detail ? (
+              <div className="w-2/6 max-md:hidden">
+                <img
+                  className="absolute w-[35%] left-[5%] h-[1000px]  object-cover max-md:hidden"
+                  src={data?.image_detail}
+                  alt="Ürün detay"
+                />
+              </div>
+            ) : (
+              <div className="w-2/6 max-md:hidden">
+                <img
+                  className="absolute w-[35%] left-[5%] h-[1000px]  object-cover max-md:hidden"
+                  src={data?.image}
+                  alt="Ürün detay"
+                />
+              </div>
+            )}
+
             <div className="w-4/6 flex justify-end items-end flex-col max-md:w-full">
               <p className="text-6xl  font-bold text-white w-[50%] max-2xl:w-[65%]  max-xl:w-[70%] max-lg:w-[80%] max-sm:w-full text-right max-sm:text-center max-sm:text-4xl">
                 {data?.title}
@@ -144,7 +157,7 @@ function ProductDetail() {
         </div>
       </>
     </>
-  )
+  );
 }
 
-export default ProductDetail
+export default ProductDetail;

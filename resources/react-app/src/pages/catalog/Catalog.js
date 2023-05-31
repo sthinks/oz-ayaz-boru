@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import Loading from '../../components/loading/Loading'
-import axiosClient from '../../utils/axiosClient'
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import Loading from "../../components/loading/Loading";
+import axiosClient from "../../utils/axiosClient";
 function Catalog() {
-  const [data, setData] = useState()
-  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
   const getRefHandler = async () => {
     await axiosClient
       .get(`/catalog`)
       .then(function (response) {
-        setData(response.data)
-        setLoading(true)
-        console.log(response.data)
+        setData(response.data);
+        setLoading(true);
+        console.log(response.data);
       })
       .catch(function (error) {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
-    getRefHandler()
-  }, [])
+    getRefHandler();
+  }, []);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return !loading ? (
     <Loading />
   ) : (
@@ -49,7 +52,7 @@ function Catalog() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Catalog
+export default Catalog;

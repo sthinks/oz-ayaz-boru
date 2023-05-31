@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import AboutBanner from "../../assets/ozayaz/aboutus.png";
 import Banner from "../../components/banner/Banner";
 import axiosClient from "../../utils/axiosClient";
@@ -13,11 +13,15 @@ function About() {
   const [loading, setLoading] = useState(false);
   //Fake Loading
   useEffect(() => {
-    window.scrollTo({ top: 0 });
     setTimeout(() => {
       setLoading(true);
     }, 1000);
   }, []);
+  useEffect(() => {
+    if (loading === true) {
+      window.scrollTo(0, 0);
+    }
+  }, [loading]);
   return !loading ? (
     <Loading />
   ) : (

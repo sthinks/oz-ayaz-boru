@@ -107,11 +107,12 @@ export default function Header() {
                       </a>
                       <a
                         className={
-                          navItem === "/urunler"
+                          navItem === "/katalog"
                             ? "text-base font-medium"
                             : "text-base font-light"
                         }
                         href="/katalog"
+                        target="blank"
                       >
                         Katalog
                       </a>

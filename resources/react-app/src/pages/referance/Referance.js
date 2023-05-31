@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import Banner from '../../components/banner/Banner'
-import axiosClient from '../../utils/axiosClient'
-import BannerImage from '../../assets/referance-banner.png'
-import Loading from '../../components/loading/Loading'
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import Banner from "../../components/banner/Banner";
+import axiosClient from "../../utils/axiosClient";
+import BannerImage from "../../assets/referance-banner.png";
+import Loading from "../../components/loading/Loading";
 
 function Referance() {
-  const [referance, setReferance] = useState()
-  const [loading, setLoading] = useState(false)
+  const [referance, setReferance] = useState();
+  const [loading, setLoading] = useState(false);
   const getRefHandler = async () => {
     await axiosClient
       .get(`/references`)
       .then(function (response) {
-        setReferance(response.data)
-        setLoading(true)
+        setReferance(response.data);
+        setLoading(true);
       })
       .catch(function (error) {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
-    getRefHandler()
-  }, [])
-
+    getRefHandler();
+  }, []);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return !loading ? (
     <Loading />
   ) : (
@@ -40,7 +42,7 @@ function Referance() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Referance
+export default Referance;

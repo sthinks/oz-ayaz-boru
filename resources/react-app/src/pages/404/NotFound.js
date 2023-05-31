@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import BannerImg from "../../assets/ozayaz/homebanner.png";
 import { Link } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
@@ -7,6 +7,9 @@ function NotFound() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(false);
+  }, []);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
   return loading ? (
     <Loading />
