@@ -20,6 +20,7 @@ export default function Header() {
     { name: "Hakkımızda", href: "/hakkimizda" },
     { name: "Ürünlerimiz", href: "/urunler" },
     { name: "Katalog", href: "/katalog" },
+    { name: "Fiyat Listesi", href: "/fiyat-listesi" },
     { name: "İletişim", href: "/iletisim" },
   ];
   const navigate = useNavigate();
@@ -74,7 +75,7 @@ export default function Header() {
                         />
                       </a>
                     </div>
-                    <div className="w-full flex justify-end items-center text-white gap-32 max-lg:gap-12">
+                    <div className="w-full flex justify-end items-center text-white gap-16 max-lg:gap-10">
                       <a
                         className={
                           navItem === "/"
@@ -115,6 +116,17 @@ export default function Header() {
                         target="blank"
                       >
                         Katalog
+                      </a>
+                      <a
+                        className={
+                          navItem === "/fiyat-listesi"
+                            ? "text-base font-medium"
+                            : "text-base font-light"
+                        }
+                        href="/fiyatlistesi"
+                        target="blank"
+                      >
+                        Fiyat Listesi
                       </a>
                       <a
                         className={
