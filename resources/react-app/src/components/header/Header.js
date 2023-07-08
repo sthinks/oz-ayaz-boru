@@ -20,7 +20,7 @@ export default function Header() {
     { name: "Hakkımızda", href: "/hakkimizda" },
     { name: "Ürünlerimiz", href: "/urunler" },
     { name: "Katalog", href: "/katalog" },
-    { name: "Fiyat Listesi", href: "/fiyat-listesi" },
+    { name: "Fiyat Listesi", href: "/fiyatlistesi" },
     { name: "İletişim", href: "/iletisim" },
   ];
   const navigate = useNavigate();
@@ -119,7 +119,7 @@ export default function Header() {
                       </a>
                       <a
                         className={
-                          navItem === "/fiyat-listesi"
+                          navItem === "/fiyatlistesi"
                             ? "text-base font-medium"
                             : "text-base font-light"
                         }
