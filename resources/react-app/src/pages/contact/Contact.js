@@ -30,7 +30,6 @@ function Contact() {
     onSubmit: async (values, { resetForm }) => {
       try {
         const result = await axiosClient.post("/contact", values);
-        console.log(result);
         if (result.data.message === "Success") {
           notify();
           resetForm();

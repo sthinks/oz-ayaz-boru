@@ -14,7 +14,6 @@ function FactorySlider() {
     await axiosClient
       .get(`/factory`)
       .then(function (response) {
-        console.log(response.data);
         setImage(response.data[0].image);
       })
       .catch(function (error) {
@@ -80,8 +79,6 @@ function FactorySlider() {
     return () => document.body.removeEventListener("click", closeDropdown);
   }, []);
   const dontDragHandler = (pageX, item) => {
-    console.log(pageX);
-    console.log("drag", drag);
     if (drag !== pageX) {
       setModal(false);
     } else {

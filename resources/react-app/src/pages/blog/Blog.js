@@ -40,7 +40,6 @@ function Blog() {
   }, []);
   const filterProduct = (value) => {
     const result = data?.filter((item) => item.id === value);
-    console.log(result[0].image);
     setModal(true);
     setFilterImage(result[0].image);
   };

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/header/logo.png";
 import LogoBlack from "../../assets/ozayaz/logoo.png";
 import { useEffect, useState } from "react";
+import servis from "../../service/services";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -11,16 +12,22 @@ function classNames(...classes) {
 
 export default function Header() {
   const [navItem, setNavItem] = useState(" ");
+  const [list, setList] = useState();
+  const getFile = async () => {
+    const file = await servis.fetchpriceFile();
+    setList(file.data[0].price_file[0].download_link);
+  };
   const slug = window.location.pathname;
   useEffect(() => {
     setNavItem(slug);
+    getFile();
   }, [slug]);
   const navigation = [
     { name: "Anasayfa", href: "/" },
     { name: "Hakkımızda", href: "/hakkimizda" },
     { name: "Ürünlerimiz", href: "/urunler" },
     { name: "Katalog", href: "/katalog" },
-    { name: "Fiyat Listesi", href: "/fiyatlistesi" },
+    { name: "Fiyat Listesi", href: list, target: true },
     { name: "İletişim", href: "/iletisim" },
   ];
   const navigate = useNavigate();
@@ -123,7 +130,7 @@ export default function Header() {
                             ? "text-base font-medium"
                             : "text-base font-light"
                         }
-                        href="/fiyatlistesi"
+                        href={list}
                         target="blank"
                       >
                         Fiyat Listesi
@@ -152,6 +159,7 @@ export default function Header() {
                   key={item.name}
                   as="a"
                   href={item.href}
+                  target={item.target ? "_blank" : ""}
                   className="block px-3 py-2 rounded-md text-slate-700 font-medium"
                 >
                   {item.name}

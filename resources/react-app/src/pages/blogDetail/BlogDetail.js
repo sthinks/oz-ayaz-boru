@@ -10,10 +10,8 @@ function BlogDetail() {
     await axiosClient
       .get(`/blog-announcement/${slug.slug}`)
       .then(function (response) {
-        console.log(response.data);
         setData(response.data);
         setLoading(true);
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

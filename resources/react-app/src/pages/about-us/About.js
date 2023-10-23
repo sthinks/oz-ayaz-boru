@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import AboutBanner from "../../assets/ozayaz/aboutus.png";
 import Banner from "../../components/banner/Banner";
 import axiosClient from "../../utils/axiosClient";
+import { GrClose } from "react-icons/gr";
 import Loading from "../../components/loading/Loading";
 import Bizkim from "../../assets/ozayaz/weare.png";
 import Misyon from "../../assets/ozayaz/misyon.png";
@@ -9,13 +10,29 @@ import Tesis from "../../assets/ozayaz/factory.png";
 import Kalite from "../../assets/ozayaz/kalite.png";
 import Vizyon from "../../assets/ozayaz/vizyon.png";
 import FactorySlider from "../../components/factorySlider/FactorySlider";
+import { PiCertificateLight } from "react-icons/pi";
 function About() {
+  const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [clickImage, setClickImage] = useState();
+
+  const imageRef = useRef();
   //Fake Loading
   useEffect(() => {
     setTimeout(() => {
       setLoading(true);
     }, 1000);
+  }, []);
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      if (
+        e.target.className === "bg-black opacity-70 w-full h-full absolute z-40"
+      ) {
+        setModal(false);
+      }
+    };
+    document.body.addEventListener("click", closeDropdown);
+    return () => document.body.removeEventListener("click", closeDropdown);
   }, []);
   useEffect(() => {
     if (loading === true) {
@@ -92,6 +109,63 @@ function About() {
             her ürün gerekli tüm analiz ve testler yapılarak titizlikle kontrol
             edilir.
           </p>
+        </div>
+      </div>
+      {modal && (
+        <div
+          className="w-full h-full fixed top-0 left-0 z-30 flex justify-center items-center"
+          ref={imageRef}
+        >
+          <button
+            className="bg-white absolute top-10 right-4 z-50 p-2 rounded-4xl max-md:hidden"
+            onClick={() => setModal(!modal)}
+          >
+            <GrClose className="text-2xl text-black" />
+          </button>
+          <img
+            className="w-auto h-[90%] max-md:h-[70%] z-50"
+            src={clickImage}
+            alt="Üretim resmi"
+          />
+          <div className="bg-black opacity-70 w-full h-full absolute z-40" />
+        </div>
+      )}
+      <div className="w-full bg-[#F6F6F6] flex justify-center items-center flex-col mt-16 py-10">
+        <PiCertificateLight className="text-8xl max-md:text-7xl opacity-70" />
+        <p className="my-2 text-2xl font-bold opacity-60">Sertifikalarımız</p>
+      </div>
+      <div className="w-full bg-white flex justify-center items-center mt-16 max-md:flex-col py-5">
+        <div
+          className="w-1/6 max-xl:w-2/6 max-md:w-full h-auto px-2 flex flex-col justify-center items-center"
+          onClick={() => {
+            setModal(true);
+            setClickImage(
+              "https://ozayazboru.com.tr/documents/TS_EN_ISO_9001_2015_Sertifika.jpg"
+            );
+          }}
+        >
+          <p className="text-2xl font-semibold opacity-70 py-5">TR</p>
+          <img
+            className="w-full h-full shadow-xl cursor-pointer"
+            src="https://ozayazboru.com.tr/documents/TS_EN_ISO_9001_2015_Sertifika.jpg"
+            alt="Certificate"
+          />
+        </div>
+        <div
+          className="w-1/6 max-xl:w-2/6 max-md:w-full h-auto px-2 flex flex-col justify-center items-center"
+          onClick={() => {
+            setModal(true);
+            setClickImage(
+              "https://ozayazboru.com.tr/documents/TS_EN_ISO_9001_2015_Certificate_.jpg"
+            );
+          }}
+        >
+          <p className="text-2xl font-semibold opacity-70 py-5 ">ENG</p>
+          <img
+            className="w-full h-full shadow-xl cursor-pointer"
+            src="https://ozayazboru.com.tr/documents/TS_EN_ISO_9001_2015_Certificate_.jpg"
+            alt="Certificate"
+          />
         </div>
       </div>
     </>
