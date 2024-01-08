@@ -12,6 +12,10 @@ function ProductDetail() {
   const [loading, setLoading] = useState(false);
   const [filterImage, setFilterImage] = useState();
   const [modal, setModal] = useState(false);
+  const [showFullText, setShowFullText] = useState(null);
+  const [allshowFullText, setallShowFullText] = useState(null);
+  const [opentext, setOpenText] = useState(false);
+
   const closeScreen = useRef();
   const getProductHandler = async () => {
     await axiosClient
@@ -19,7 +23,28 @@ function ProductDetail() {
       .then(function (response) {
         setData(response.data);
         setLoading(true);
-        console.log(response.data);
+        const text = response.data?.technical_info;
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "text/html");
+
+        const paragraphs = Array.from(doc.querySelectorAll("p")).slice(0, 10);
+        const lastParagrafs = Array.from(doc.querySelectorAll("p")).slice(
+          10,
+          9999999
+        );
+        const container = document.createElement("div");
+        paragraphs.forEach((paragraph) =>
+          container.appendChild(paragraph.cloneNode(true))
+        );
+
+        const container2 = document.createElement("div");
+        lastParagrafs.forEach((aa) =>
+          container2.appendChild(aa.cloneNode(true))
+        );
+        setallShowFullText(container2.innerHTML);
+
+        setShowFullText(container.innerHTML);
       })
       .catch(function (error) {
         console.log(error);
@@ -60,9 +85,10 @@ function ProductDetail() {
     slidesToScroll: 1,
     arrows: false,
   };
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [data]);
+
   return !loading ? (
     <Loading />
   ) : (
@@ -111,7 +137,7 @@ function ProductDetail() {
         </div>
         <div className="w-full flex justify-center items-center max-md:my-10 my-10">
           <div className="w-full px-24 max-xl:px-24 max-lg:px-8 max-sm:px-1">
-            <div className="flex justify-center items-center w-full">
+            <div className="flex justify-center flex-col items-end w-full">
               <div className="w-2/4 max-md:hidden"></div>
               <div className="w-2/4 max-md:w-full max-md:px-6 max-sm:px-2">
                 <p className="mb-4 text-4xl font-bold opacity-60">
@@ -127,16 +153,38 @@ function ProductDetail() {
                   />
                 )}
                 {data?.technical_info ? (
-                  <p
-                    className="my-2 text-lg font-medium opacity-70"
-                    dangerouslySetInnerHTML={{ __html: data?.technical_info }}
-                  />
+                  <p>
+                    {showFullText !== null ? (
+                      <p
+                        className="my-2 text-lg"
+                        dangerouslySetInnerHTML={{
+                          __html: showFullText,
+                        }}
+                      />
+                    ) : (
+                      <p
+                        className="my-2 text-lg"
+                        dangerouslySetInnerHTML={{
+                          __html: showFullText,
+                        }}
+                      />
+                    )}
+
+                    <p
+                      className={
+                        opentext === true ? "hidden" : "cursor-pointer"
+                      }
+                      onClick={() => setOpenText(true)}
+                    >
+                      Devamını oku
+                    </p>
+                  </p>
                 ) : (
                   <p className="my-2 text-lg font-medium opacity-70">
                     İçerikler yakında girilecek.
                   </p>
                 )}
-                <div className="w-full mt-12">
+                <div className={opentext ? "hidden" : "w-full mt-12"}>
                   <a
                     className="bg-black flex justify-between items-center px-3 py-4"
                     href={data?.pdf[0].download_link}
@@ -148,8 +196,44 @@ function ProductDetail() {
                     <AiOutlineDownload className="text-white text-3xl" />
                   </a>
                 </div>
-                <div className="md:hidden flex justify-center items-center mt-12">
+                <div
+                  className={
+                    opentext === false
+                      ? "hidden"
+                      : "md:hidden flex justify-center items-center mt-12"
+                  }
+                >
                   <img src={data?.image} alt="Detay resim" />
+                </div>
+              </div>
+              <div className="w-full max-md:w-full max-md:px-6 max-sm:px-2">
+                {data?.technical_info ? (
+                  <p>
+                    {opentext === true && (
+                      <p
+                        className="my-2 text-lg"
+                        dangerouslySetInnerHTML={{
+                          __html: allshowFullText,
+                        }}
+                      />
+                    )}
+                  </p>
+                ) : (
+                  <p className="my-2 text-lg font-medium opacity-70">
+                    İçerikler yakında girilecek.
+                  </p>
+                )}
+                <div className={opentext ? "w-full mt-12" : "hidden"}>
+                  <a
+                    className="bg-black flex justify-between items-center px-3 py-4"
+                    href={data?.pdf[0].download_link}
+                    target="blank"
+                  >
+                    <p className="text-white text-base font-semibold">
+                      Ebat listesini görmek için tıklayınız!
+                    </p>
+                    <AiOutlineDownload className="text-white text-3xl" />
+                  </a>
                 </div>
               </div>
             </div>
