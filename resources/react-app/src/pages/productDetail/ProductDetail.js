@@ -6,6 +6,7 @@ import Loading from "../../components/loading/Loading";
 import { AiOutlineDownload } from "react-icons/ai";
 import "./product.css";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 function ProductDetail() {
   const slug = useParams();
   const [data, setData] = useState([]);
@@ -93,6 +94,21 @@ function ProductDetail() {
     <Loading />
   ) : (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+
+        <link
+          rel="canonical"
+          href={`https://ozayazboru.com.tr/ürünler/${data?.slug}`}
+        />
+        <meta name="description" content="Öz Ayaz Boru" />
+        <meta name="description" content={data?.title} />
+        {data?.meta_desc !== null &&
+          data?.meta_desc.map((item, i) => (
+            <meta key={i} name="description" content={item} />
+          ))}
+        <meta name="description" content="Öz Ayaz Boru Ürünler" />
+      </Helmet>
       {modal && (
         <div className="absolute w-full h-full top-0 left-0 z-40">
           <div className="absolute w-full h-full bg-black opacity-30  py-12" />

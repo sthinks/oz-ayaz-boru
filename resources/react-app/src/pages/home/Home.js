@@ -10,7 +10,7 @@ import factory from "../../assets/ozayaz/factory.png";
 import kalite from "../../assets/ozayaz/kalite.png";
 import homeboru from "../../assets/ozayaz/homeboru.png";
 import { useNavigate } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 function Home() {
   const navigate = useNavigate();
   const [blog, setBlog] = useState([]);
@@ -53,6 +53,13 @@ function Home() {
     <Loading />
   ) : (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+
+        <link rel="canonical" href="https://ozayazboru.com.tr" />
+        <meta name="description" content="Öz ayaz boru" />
+        <meta name="description" content="Öz Ayaz Boru" />
+      </Helmet>
       <div className="w-auto h-auto flex justify-start items-center relative">
         <div className="bg-black opacity-70 w-full h-full absolute" />
         <img

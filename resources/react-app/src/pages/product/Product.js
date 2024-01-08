@@ -7,6 +7,7 @@ import ProductImg from "../../assets/ozayaz/aboutus.png";
 import Loading from "../../components/loading/Loading";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 function Product() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -59,6 +60,16 @@ function Product() {
     <Loading />
   ) : (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+
+        <link rel="canonical" href="https://ozayazboru.com.tr/urunler" />
+        <meta name="description" content="Öz Ayaz Boru" />
+        <meta name="description" content="Öz Ayaz Boru Ürünler" />
+        {data?.map((item, i) => (
+          <meta key={i} name="description" content={item.title} />
+        ))}
+      </Helmet>
       <Banner image={ProductImg} title="Ürünler" />
       <div className="relative w-full h-auto">
         <div className="flex justify-center items-center px-48 relative w-full top-[-150px] max-lg:top-[-80px] max-md:top-0 max-md:my-10 max-xl:px-14 max-md:px-2 max-xl:relative">

@@ -79,7 +79,7 @@ class ProductController extends Controller
         } else {
             $data->image = null;
         }
-         if ($data->image_detail) {
+        if ($data->image_detail) {
             $data->image_detail = url(
                 sprintf(
                     'storage/%s',
@@ -93,7 +93,17 @@ class ProductController extends Controller
         $data->banner = url(
             sprintf('storage/%s', str_replace('\\', '/', $data->banner))
         );
+        if ($data->meta_desc) {
+            $metaDesc = $data->meta_desc;
 
+            // Virgüllerle ayrılmış stringi diziye çevir
+            $metaDescArray = explode(',', $metaDesc);
+
+            // Elde edilen dizi
+            $data->meta_desc = $metaDescArray;
+        } else {
+            $data->meta_desc = null;
+        }
         return response()->json($data);
     }
     public function getFactory()

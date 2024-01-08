@@ -11,6 +11,8 @@ import Kalite from "../../assets/ozayaz/kalite.png";
 import Vizyon from "../../assets/ozayaz/vizyon.png";
 import FactorySlider from "../../components/factorySlider/FactorySlider";
 import { PiCertificateLight } from "react-icons/pi";
+import { Helmet } from "react-helmet";
+
 function About() {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -43,6 +45,19 @@ function About() {
     <Loading />
   ) : (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <link rel="canonical" href="https://ozayazboru.com.tr/hakkimizda" />
+        <meta name="description" content="Öz ayaz boru" />
+        <meta name="description" content="Öz Ayaz Boru" />
+        <meta name="description" content="Öz Ayaz Boru Hakkımızda" />
+        <meta name="description" content="Öz Ayaz Boru Biz Kimiz?" />
+        <meta name="description" content="Öz Ayaz Boru Vizyon" />
+        <meta name="description" content="Öz Ayaz Boru Misyon" />
+        <meta name="description" content="Öz Ayaz Boru Üretim Tesisimiz" />
+        <meta name="description" content="Öz Ayaz Boru Kalite Anlayışımız" />
+        <meta name="description" content="Öz Ayaz Boru Sertifikalarımız" />
+      </Helmet>
       <Banner image={AboutBanner} title="Hakkımızda" />
       <div className="w-full flex justify-center  my-20 max-sm:mt-5 flex-col">
         <div className="w-full flex justify-center items-center flex-col py-10 bg-[#F6F6F6]">

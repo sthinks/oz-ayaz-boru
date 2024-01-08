@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { IoIosSearch } from "react-icons/io";
 import * as Yup from "yup";
 import Loading from "../../components/loading/Loading";
+import { Helmet } from "react-helmet";
 function Contact() {
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
@@ -52,6 +53,13 @@ function Contact() {
     <Loading />
   ) : (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+
+        <link rel="canonical" href="https://ozayazboru.com.tr/iletisim" />
+        <meta name="description" content="Öz Ayaz Boru" />
+        <meta name="description" content="Öz Ayaz Boru İletisim" />
+      </Helmet>
       <div className="w-auto h-auto flex justify-start items-center relative">
         <div className="bg-black opacity-60 w-full h-full absolute" />
         <img
